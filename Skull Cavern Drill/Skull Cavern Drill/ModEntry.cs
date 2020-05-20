@@ -14,12 +14,14 @@ namespace Skull_Cavern_Drill
 
     public class ModEntry : Mod
     {
+        //Sets up the event and the patch
         public override void Entry(IModHelper helper)
         {
             helper.Events.GameLoop.SaveLoaded += OnSaveLoaded;
-            ObjectPatches.Apply(this.ModManifest.UniqueID);
+            ObjectPatches.ApplyPatch(this.ModManifest.UniqueID);
         }
 
+        //The API and ID are gotten at this event since they're both loaded
         private void OnSaveLoaded(object sender, SaveLoadedEventArgs e)
         {
             ObjectPatches.Initialize(Helper, Monitor);
@@ -32,7 +34,8 @@ namespace Skull_Cavern_Drill
         private static IMonitor Monitor;
         private static int MyCraftableID = -1;
 
-        public static void Apply(string modId)
+        //Create the patch inside of this class, rather than in ModEntry
+        public static void ApplyPatch(string modId)
         {
             var harmony = HarmonyInstance.Create(modId);
 
@@ -42,6 +45,7 @@ namespace Skull_Cavern_Drill
             );
         }
 
+        //Get JsonAssets API and the Drill's item ID
         public static void Initialize(IModHelper helper, IMonitor monitor)
         {
             api = helper.ModRegistry.GetApi<IApi>("spacechase0.JsonAssets");
@@ -57,9 +61,11 @@ namespace Skull_Cavern_Drill
         {
             try
             {
+                //Checks if you're holding the drill, and if you're in the Skull Cavern
                 if ((__instance.bigCraftable.Value && __instance.ParentSheetIndex == MyCraftableID) && (location is MineShaft shaft && Game1.CurrentMineLevel > 120))
                 {
-                    shaft.createLadderDown(x, y, true);
+                    //Convert from pixel coordinates to tile coordinates
+                    shaft.createLadderDown((x / 64), (y / 64), true);
                     __result = true;
                 }
                 return false;

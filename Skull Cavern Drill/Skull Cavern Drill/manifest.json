@@ -1,7 +1,7 @@
 ﻿{
 	"Name": "Skull Cavern Drill",
 	"Author": "S1mmyy",
-	"Version": "0.8.0",
+	"Version": "1.0.0",
 	"Description": "Adds functionality to the Dwarven Drill to create shafts in the Skull Cavern.",
 	"UniqueID": "S1mmyy.SkullCavernDrill",
 	"EntryDll": "Skull Cavern Drill.dll",
