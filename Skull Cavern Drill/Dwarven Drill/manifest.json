@@ -1,12 +1,12 @@
 ﻿{
 	"Name": "Dwarven Drill",
 	"Author": "S1mmyy",
-	"Version": "1.0.0",
+	"Version": "1.1.0",
 	"Description": "Adds a drill item. (Does nothing without Skull Cavern Drill mod)",
 	"UniqueID": "S1mmyy.DwarvenDrill",
 	"MinimumApiVersion": "3.0.0",
 	"ContentPackFor": {
 		"UniqueID": "spacechase0.JsonAssets"
 		},
-	"UpdateKeys": []
+	"UpdateKeys": [ "Nexus:6120" ]
 }
