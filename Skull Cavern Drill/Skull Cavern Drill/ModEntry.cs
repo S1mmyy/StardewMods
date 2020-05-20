@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Harmony;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Locations;
-using Harmony;
+using System;
 
 namespace Skull_Cavern_Drill
 {
@@ -16,6 +15,7 @@ namespace Skull_Cavern_Drill
     {
         public override void Entry(IModHelper helper)
         {
+            ObjectPatches.Initialize(helper, Monitor);
             var harmony = HarmonyInstance.Create(this.ModManifest.UniqueID);
 
             harmony.Patch(
@@ -32,25 +32,30 @@ namespace Skull_Cavern_Drill
 
         public static void Initialize(IModHelper helper, IMonitor monitor)
         {
+            // api is never set to anything, as .GetApi can't be used, since JA isn't loaded.
+            // Figure out where/when I need to call Initialize() in Entry().
             api = helper.ModRegistry.GetApi<IApi>("spacechase0.JsonAssets");
             Monitor = monitor;
         }
 
-        internal static bool PlacementAction_Prefix(StardewValley.Object __instance, GameLocation location, int x, int y, Farmer who = null)
+        internal static bool PlacementAction_Prefix(StardewValley.Object __instance, GameLocation location, int x, int y, ref bool __result, Farmer who = null)
         {
             try
             {
-                if (__instance.ParentSheetIndex == api.GetBigCraftableId("Dwarven Drill") && location is MineShaft && Game1.CurrentMineLevel > 120)
+                if (api != null)
                 {
-                    (location as MineShaft).createLadderDown(x, y, true);
-                    return true;
+                    if ((location is MineShaft && Game1.CurrentMineLevel > 120) && __instance.ParentSheetIndex == api.GetBigCraftableId("Dwarven Drill"))
+                    {
+                        (location as MineShaft).createLadderDown(x, y, true);
+                        __result = true;
+                    }
                 }
                 return false;
             }
             catch (Exception ex)
             {
                 Monitor.Log($"Failed in {nameof(PlacementAction_Prefix)}:\n{ex}", LogLevel.Error);
-                return false;
+                return true;
             }
         }
     }

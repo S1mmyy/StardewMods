@@ -36,5 +36,5 @@
     },
 	"PurchaseFrom": "Dwarf",
 	"PurchasePrice": 40000,
-	"PurchaseRequirements": "b 1",
+	//"PurchaseRequirements": "b 1",
 }
