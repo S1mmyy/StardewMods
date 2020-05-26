@@ -67,8 +67,9 @@ namespace Skull_Cavern_Drill
                     //Convert from pixel coordinates to tile coordinates
                     shaft.createLadderDown((x / 64), (y / 64), true);
                     __result = true;
+                    return false;
                 }
-                return false;
+                return true;
             }
             catch (Exception ex)
             {
