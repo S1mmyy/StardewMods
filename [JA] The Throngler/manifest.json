@@ -1,0 +1,11 @@
+{
+    "Name": "The Throngler Sword",
+    "Author": "S1mmyy, Slimeybox27",
+    "Version": "1.0.0",
+    "Description": "Adds a neat little sword.",
+    "UniqueID": "S1mmyy.Throngler",
+    "UpdateKeys": [],
+    "ContentPackFor": {
+        "UniqueID": "spacechase0.JsonAssets"
+    }
+}

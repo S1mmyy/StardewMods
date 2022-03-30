@@ -1,0 +1,16 @@
+{
+    "Name": "The Throngler",
+    "Description": "This weapon looks to be very capable at throngling enemies.",
+    "Type": "dagger",
+    "MinimumDamage": 4,
+    "MaximumDamage": 7,
+    "Knockback": 2,
+    "Speed": 5,
+    "Accuracy": 95,
+    "Defense": 1,
+    "MineDropVar": -1,
+    "MineDropMinimumLevel": 0,
+    "ExtraSwingArea": 2,
+    "CritChance": 0.5,
+    "CritMultiplier": 5.0,
+}
